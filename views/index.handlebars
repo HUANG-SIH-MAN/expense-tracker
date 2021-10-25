@@ -1,7 +1,17 @@
-<ul class="list-group">
-  <li class="list-group-item">An item</li>
-  <li class="list-group-item">A second item</li>
-  <li class="list-group-item">A third item</li>
-  <li class="list-group-item">A fourth item</li>
-  <li class="list-group-item">And a fifth one</li>
-</ul>
+<div class="row mt-4">
+  <div class="col-md-8 mx-auto">
+    {{#if expenses }}
+    <ul class="list-group">
+      {{#each expenses}}
+      <li class="list-group-item">{{ this }}</li>
+      {{/each}}
+    </ul>
+    {{else}}
+      <div class="container flex-column d-flex align-items-center mt-4">
+        <h1 class="display-4">沒有任何支出紀錄</h1>
+        <p class="lead mt-4">請點擊新增支出按鈕，快來記帳吧!!</p>
+      </div>
+    {{/if}}
+    <a class="btn btn-warning btn-lg btn-block mt-4" href="/expense/create" type="button">新增支出</a>
+  </div>
+</div>
