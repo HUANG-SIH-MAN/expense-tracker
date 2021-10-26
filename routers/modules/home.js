@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const expense = require('../../modles/expense')
+const expense = require('../../models/expense')
 
 router.get('/',(req, res)=>{
     expense.find()
