@@ -1,5 +1,18 @@
-<div class="row mt-4">
-  <div class="col-md-6 mx-auto d-flex justify-content-center ">
+<div class="row mt-4 mb-4">
+  <div class="col-md-10  d-flex justify-content-end">
+    <form action="/search" method="POST" class="form-inline">
+      <div class="form-group">
+        <label for="categoryId"><span class="search-title">類別：</span></label>
+          <select class="form-control ml-3" id="categoryId" name="categoryId" required>
+            {{#each categoryData}}
+              <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+      </div>
+      <button class="btn btn-outline-secondary ml-4" type="submit">搜尋</button>
+    </form>
+  </div>
+  <div class="col-md-6 mx-auto d-flex justify-content-center mt-4">
     <h2>總金額：</h2>
     <h2 class="totalAmount ml-3">{{ totalAmount }}</h2>
   </div>
