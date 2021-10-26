@@ -27,9 +27,15 @@ router.get('/edit/:id',async (req, res) => {
     return res.render('edit', { expenseData,  categoryData})
 })
 
-router.put('/edit/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const expenseId = req.params.id 
     expense.findByIdAndUpdate(expenseId, { $set: req.body })
+    .then(()=> res.redirect('/'))
+})
+
+router.delete('/:id', (req, res) => {
+    const expenseId = req.params.id
+    expense.findByIdAndDelete(expenseId)
     .then(()=> res.redirect('/'))
 })
 

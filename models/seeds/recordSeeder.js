@@ -2,14 +2,8 @@ const categoryData = require('./categoryData.json').results
 const Category = require('../category')
 const db = require('../../config/mongoose')
 
-db.once('open', ()=>{
-    Category.create(categoryData)
-    // Promise.all(
-        
-    // )
-    // .then(()=> {
-    //     console.log('all done!')
-    //     process.exit()
-    // })
-    // .catch(err => console.log(err))
+db.once('open', async ()=>{
+    await Category.create(categoryData)
+    console.log('all done!')
+    return process.exit()
 })

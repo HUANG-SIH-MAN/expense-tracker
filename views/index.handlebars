@@ -19,7 +19,9 @@
           </div>
           <div class="col-3 d-flex align-items-center">
             <a href="/expense/edit/{{this._id}}" type="button" class="btn btn-outline-success mr-3">修改</a>
-            <a href="/expense/delete/{{this._id}}" type="button" class="btn btn-outline-danger">刪除</a>
+            <form action="/expense/{{this._id}}?_method=DELETE" method="post">
+              <button type="submit" class="btn btn-outline-danger">刪除</a>
+            </form>  
           </div>
         </div>
       </li>

@@ -4,7 +4,7 @@
          <h1>修改支出資料</h1>
         <span class="text-danger">*為必填欄位</span>  
       </div>
-      <form action="/expense/edit/{{ expenseData._id }}?_method=PUT" method="POST">        
+      <form action="/expense/{{ expenseData._id }}?_method=PUT" method="POST">        
         <div class="form-group row mt-3">
             <label for="name" class="col-sm-2 col-form-label">名稱<span class="text-danger">*</span>：</label>
             <div class="col-sm-10">
