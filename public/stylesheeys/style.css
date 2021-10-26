@@ -1,0 +1,25 @@
+i {
+	color: #0099ff;
+}
+
+strong {
+	font-size: x-large;
+}
+
+li {
+	box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+		rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+}
+
+.time {
+	font-size: x-small;
+}
+
+.totalAmount {
+	color: rgba(255, 123, 0, 0.904);
+	font-size: xx-large;
+}
+
+.amount {
+	font-size: larger;
+}
