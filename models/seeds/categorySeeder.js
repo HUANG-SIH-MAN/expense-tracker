@@ -4,6 +4,6 @@ const db = require('../../config/mongoose')
 
 db.once('open', async ()=>{
     await Category.create(categoryData)
-    console.log('all done!')
+    console.log('categorySeeder created!')
     return process.exit()
 })

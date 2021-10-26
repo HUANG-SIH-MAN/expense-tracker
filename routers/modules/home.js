@@ -5,7 +5,11 @@ const expense = require('../../models/expense')
 router.get('/',(req, res)=>{
     expense.find()
     .lean()
-    .then(expenses => res.render('index', { expenses }))
+    .sort({ date: 'desc' }) 
+    .then(expenses =>{   
+        const totalAmount = expenses.map(expense => expense.amount).reduce((a, b) => a + b)
+        res.render('index', { expenses, totalAmount })
+    })
 })
 
 module.exports = router
