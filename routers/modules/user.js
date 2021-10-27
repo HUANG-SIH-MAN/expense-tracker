@@ -26,7 +26,6 @@ router.post('/register', async (req, res) => {
     const userExist = await User.findOne({ email })
     if (userExist) {
         const error = '此電子郵件已經註冊過了!!'
-        console.log(error)
         return res.render('register', { name, email, password, confirmPassword, error }) 
     }
     //儲存註冊帳號資料
