@@ -14,7 +14,8 @@ router.post('/create' ,(req, res) => {
     expense.create({
         name, 
         date, 
-        amount, 
+        amount,
+        userId: req.user._id, 
         categoryId 
     })
     .then(()=> res.redirect('/')) 

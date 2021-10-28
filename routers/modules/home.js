@@ -4,8 +4,9 @@ const expense = require('../../models/expense')
 const category = require('../../models/category')
 
 router.get('/', async (req, res)=>{
+    const userId = req.user._id
     const categoryData = await category.find().select('name').lean() 
-    const { expenses, totalAmount } = await expense.find()
+    const { expenses, totalAmount } = await expense.find({ userId })
     .lean()
     .sort({ date: 'desc' }) 
     .then(expenses =>{   
@@ -16,9 +17,10 @@ router.get('/', async (req, res)=>{
 })
 
 router.post('/search', async (req, res) => {
+    const userId = req.user._id
     const { categoryId } = req.body
     const categoryData = await category.find().select('name').lean()
-    const searchResult = await expense.find({ categoryId }).lean()
+    const searchResult = await expense.find({ $and: [{userId}, {categoryId}] }).lean()
     return res.render('index', { expenses: searchResult, categoryData})
 })
 

@@ -42,7 +42,6 @@ module.exports = app => {
         .catch(err => done(err, false))
     }))
                                           
-
     //序列化/反序列化
     passport.serializeUser((user, done) => {
         done(null, user.id)

@@ -13,13 +13,12 @@ const expenseSchema = new Schema({
         type: Number,
         required: true
     },
-    //等實作出登入功能在加入(為了方便測試CRUD功能)
-    // userId: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     index: true,
-    //     required: true
-    // },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        index: true,
+        required: true
+    },
     categoryId: {
         type: Schema.Types.ObjectId,
         ref: 'category',
