@@ -4,6 +4,7 @@
             <h1>登入帳號</h1>
             <span class="text-danger">*為必填欄位</span>  
         </div>
+        {{> message}}
         <form action="/users/login" method="post">
             <div class="form-group row m-3">
                 <label for="email" class="col-sm-2 col-form-label">電子郵件<span class="text-danger">*</span>：</label>
