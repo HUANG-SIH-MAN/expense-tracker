@@ -1,4 +1,5 @@
 const express = require('express')
+const moment = require('moment')
 const category = require('../../models/category')
 const expense = require('../../models/expense')
 const router = express.Router()
@@ -25,6 +26,7 @@ router.get('/edit/:id',async (req, res) => {
     const expenseId = req.params.id  
     const expenseData = await expense.findById(expenseId).lean()
     const categoryData = await category.find().select('name').lean() 
+    expenseData.date = moment(expenseData.date).format('YYYY-MM-DD')
     return res.render('edit', { expenseData,  categoryData})
 })
 

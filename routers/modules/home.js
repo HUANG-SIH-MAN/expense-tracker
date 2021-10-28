@@ -1,4 +1,5 @@
 const express = require('express')
+const moment = require('moment')
 const router = express.Router()
 const expense = require('../../models/expense')
 const category = require('../../models/category')
@@ -14,9 +15,10 @@ router.get('/', async (req, res)=>{
     .then(expenses =>{ 
         if (expenses.length === 0) return res.render('index',{ categoryData })  
         const totalAmount = expenses.map(expense => expense.amount).reduce((a, b) => a + b)
-        //取得類別圖示
+        //取得類別圖示和時間轉換
         expenses.forEach(item => {
             category.findById(item.categoryId).then(category => item.icon = category.icon)
+            item.date = moment(item.date).format('YYYY-MM-DD')
         })
         return { expenses, totalAmount }
     })
@@ -33,9 +35,10 @@ router.post('/search', async (req, res) => {
         if (searchResult.length === 0) return res.render('index',{ categoryData })  
         //計算總金額
         const totalAmount = searchResult.map(expense => expense.amount).reduce((a, b) => a + b)
-        //取得類別圖示
+        //取得類別圖示和時間轉換
         searchResult.forEach(item => {
             category.findById(item.categoryId).then(category => item.icon = category.icon)
+            item.date = moment(item.date).format('YYYY-MM-DD')
         })
         return { searchResult, totalAmount }
     })
