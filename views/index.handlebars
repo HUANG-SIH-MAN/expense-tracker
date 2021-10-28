@@ -14,7 +14,13 @@
   </div>
   <div class="col-md-6 mx-auto d-flex justify-content-center mt-4">
     <h2>總金額：</h2>
-    <h2 class="totalAmount ml-3">{{ totalAmount }}</h2>
+    <h2 class="totalAmount ml-3">
+      {{#if totalAmount}}
+        {{ totalAmount }}
+      {{else}}
+        0
+      {{/if}}
+      </h2>
   </div>
   <div class="col-md-8 mx-auto">
     {{#if expenses }}
@@ -23,7 +29,7 @@
       <li class="list-group-item m-3">
         <div class="row">
           <div class="col-9 d-flex justify-content-start align-items-center">
-            <i class="fas fa-home fa-2x mr-5"></i>
+            <i class="{{ this.icon }} fa-2x mr-5"></i>
             <div class="d-flex flex-column justify-content-center mr-5">
               <strong>{{ this.name }}</strong>
               <div class="time">{{ this.date }}</div>
@@ -32,9 +38,9 @@
           </div>
           <div class="col-3 d-flex align-items-center">
             <a href="/expense/edit/{{this._id}}" type="button" class="btn btn-outline-success mr-3">修改</a>
-            <form action="/expense/{{this._id}}?_method=DELETE" method="post">
-              <button type="submit" class="btn btn-outline-danger">刪除</a>
-            </form>  
+            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" data-id="{{this._id}}">
+              刪除
+            </button>  
           </div>
         </div>
       </li>
@@ -49,3 +55,30 @@
     <a class="btn btn-warning btn-lg btn-block mt-4" href="/expense/create" type="button">新增支出</a>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">是否刪除支出</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        注意!!支出一旦刪除<strong class="text-danger">無法復原</strong>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+        <form action="/expense/{{this._id}}?_method=DELETE" method="post">
+          <button type="submit" class="btn btn-outline-danger">刪除</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  
+</script>

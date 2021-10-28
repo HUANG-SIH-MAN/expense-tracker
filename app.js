@@ -16,19 +16,12 @@ const app = express()
 const port = process.env.PORT
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main'
-    // ,helpers: {
-    //     getCategoryIcon: function (categoryId) {
-    //        return category.findById(categoryId)
-    //        .lean()
-    //        .then(item => item.icon)
-    //     }
-    // ,helpers: {
-    //     getCategoryIcon: async function (categoryId) {
-    //         const item = await category.findById(categoryId).lean()
-    //        return item.icon
-    //     }
-    // }
-}))
+    ,helpers: {
+        equal: function (a, b) {
+            console.log(typeof(b))
+            if (a === b) return 'selected'
+        }
+}}))
 
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
