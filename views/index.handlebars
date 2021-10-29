@@ -38,7 +38,7 @@
           </div>
           <div class="col-3 d-flex align-items-center">
             <a href="/expense/edit/{{this._id}}" type="button" class="btn btn-outline-success mr-3">修改</a>
-            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal" data-id="{{this._id}}">
+            <button type="button" class="btn btn-outline-danger delete-confirm" data-toggle="modal" data-target="#exampleModal" data-id="{{this._id}}">
               刪除
             </button>  
           </div>
@@ -69,16 +69,24 @@
       <div class="modal-body">
         注意!!支出一旦刪除<strong class="text-danger">無法復原</strong>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer delete-expense">
         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-        <form action="/expense/{{this._id}}?_method=DELETE" method="post">
-          <button type="submit" class="btn btn-outline-danger">刪除</a>
-        </form>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  
+  document.addEventListener('click', event => {
+    const target = event.target
+    if (target.matches('.delete-confirm')) {
+      const expenseID = target.dataset.id
+      const deleteExpense = document.querySelector('.delete-expense')
+      deleteExpense.innerHTML += `
+        <form action="/expense/${expenseID}?_method=DELETE" method="post">
+          <button type="submit" class="btn btn-outline-danger">刪除</a>
+        </form>
+      `
+    }
+  })
 </script>
