@@ -5,7 +5,7 @@
         <label for="categoryId"><span class="search-title">類別：</span></label>
           <select class="form-control ml-3" id="categoryId" name="categoryId" required>
             {{#each categoryData}}
-              <option value="{{this._id}}">{{this.name}}</option>
+              <option value="{{this._id}}" {{{equal this.name this.searchCaregory}}}>{{this.name}}</option>
             {{/each}}
           </select>
       </div>

@@ -18,7 +18,7 @@ const port = process.env.PORT
 app.engine('handlebars', exphbs({ defaultLayout: 'main'
     ,helpers: {
         equal: function (a, b) {
-            console.log(typeof(b))
+            console.log(a, b)
             if (a === b) return 'selected'
         }
 }}))

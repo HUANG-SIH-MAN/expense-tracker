@@ -27,8 +27,15 @@ router.get('/', async (req, res)=>{
 
 router.post('/search', async (req, res) => {
     const userId = req.user._id
+    //取得類別相關資料
     const { categoryId } = req.body
     const categoryData = await category.find().select('name').lean()
+
+    // const searchCaregory = category.findById(categoryId).then(item => item.name)
+    // categoryData.forEach(item => item.searchCaregory = searchCaregory)
+
+    // console.log(categoryData)
+    //取得支出相關資料
     const { searchResult, totalAmount } = await expense.find({ $and: [{userId}, {categoryId}] })
     .lean()
     .sort({ date: 'desc' }) 
