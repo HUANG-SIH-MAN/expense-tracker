@@ -37,3 +37,7 @@ li {
 	font-size: 2em;
 	text-align: center;
 }
+
+.expense-data {
+	width: 22%;
+}

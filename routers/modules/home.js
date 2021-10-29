@@ -31,6 +31,7 @@ router.post('/search', async (req, res) => {
     const categoryData = await category.find().select('name').lean()
     const { searchResult, totalAmount } = await expense.find({ $and: [{userId}, {categoryId}] })
     .lean()
+    .sort({ date: 'desc' }) 
     .then(searchResult =>{
         if (searchResult.length === 0) return res.render('index',{ categoryData })  
         //計算總金額

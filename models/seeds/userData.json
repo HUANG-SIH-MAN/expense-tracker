@@ -1,0 +1,14 @@
+{
+    "results":[
+        {
+            "name": "王小明",
+            "email": "user1@exmaple.com",
+            "password": "zxcvbn"
+        },
+        {
+            "name": "王大明",
+            "email": "user2@exmaple.com",
+            "password": "asdfgh"
+        }  
+    ]
+}
