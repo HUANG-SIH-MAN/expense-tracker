@@ -3,7 +3,8 @@
     <form action="/" method="GET" class="form-inline">
       <div class="form-group">
         <label for="categoryId"><span class="search-title">類別：</span></label>
-          <select class="form-control ml-3" id="categoryId" name="categoryId" required>
+          <select class="form-control ml-3" id="categoryId" name="categoryId">
+            <option value="">全部</option>
             {{#each categoryData}}
               <option value="{{this._id}}" {{{equal this.name this.searchCaregory}}}>{{this.name}}</option>
             {{/each}}
