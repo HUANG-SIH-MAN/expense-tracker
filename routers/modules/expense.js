@@ -6,6 +6,7 @@ const router = express.Router()
 
 router.get('/create', (req, res) => {
     category.find()
+    .sort({ _id: 'asc' })
     .lean()
     .then(category => res.render('create', { category }))
 })
@@ -25,9 +26,14 @@ router.post('/create' ,(req, res) => {
 router.get('/edit/:id',async (req, res) => {
     const expenseId = req.params.id  
     const expenseData = await expense.findById(expenseId).lean()
-    const categoryData = await category.find().select('name').lean() 
     expenseData.date = moment(expenseData.date).format('YYYY-MM-DD')
-    return res.render('edit', { expenseData,  categoryData})
+    const categoryData = await category.find().select('name').sort({ _id: 'asc' }).lean()  
+    for (let item of categoryData) {
+        if (item._id.toString() === expenseData.categoryId.toString()) {
+          item.selected = 'selected'  
+          return res.render('edit', { expenseData,  categoryData})
+        }
+    }
 })
 
 router.put('/:id', (req, res) => {

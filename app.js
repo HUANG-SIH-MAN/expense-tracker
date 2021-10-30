@@ -11,18 +11,10 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 
-
 const app = express()
 const port = process.env.PORT
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main'
-    ,helpers: {
-        equal: function (a, b) {
-            //console.log(a, b)
-            if (a === b) return 'selected'
-        }
-}}))
-
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 app.use(session({
