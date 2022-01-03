@@ -2,6 +2,7 @@ const passport = require('passport')
 const bcrypt = require('bcryptjs')
 const LocalStrategy = require('passport-local').Strategy
 const FacebookStrategy = require('passport-facebook')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const User = require('../models/user')
 
 module.exports = app => {
@@ -25,12 +26,12 @@ module.exports = app => {
     }))
 
     //Facebook 登入
-    passport.use(new FacebookStrategy({  
+    passport.use(new FacebookStrategy({ 
         clientID: process.env.FACEBOOK_ID,
-        clientSecret: process.env.FACEBOOK_SECRET,
-        callbackURL: process.env.FACEBOOK_CALLBACK,
+        clientSecret: process.env.FACEBOOK_SECRET,
+        callbackURL: process.env.FACEBOOK_CALLBACK,
         profileFields: ['email', 'displayName']
-    }, (accessToken, refreshToken, profile, done)  => {
+    }, (accessToken, refreshToken, profile, done)  => {
         const { name, email } = profile._json
         User.findOne({email})
         .then(async (user) => {
@@ -41,7 +42,26 @@ module.exports = app => {
         })
         .catch(err => done(err, false))
     }))
-                                          
+ 
+    //google 登入
+    passport.use(new GoogleStrategy({
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: process.env.GOOGLE_CALLBACK
+      },
+      (accessToken, refreshToken, profile, done) => {
+        const { name, email } = profile._json
+        User.findOne({email})
+        .then(async (user) => {
+            if (user) return done(null, user)
+            const randomPassword = Math.random().toString(36).slice(-8)
+            const hashPassword = await bcrypt.genSalt(10).then(salt => bcrypt.hash(randomPassword, salt))
+            await User.create({ name, email, password: hashPassword }).then(()=> done(null, user))
+        })
+        .catch(err => done(err, false))
+      }
+    ))
+
     //序列化/反序列化
     passport.serializeUser((user, done) => {
         done(null, user.id)
